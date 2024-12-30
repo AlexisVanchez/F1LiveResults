@@ -7,11 +7,11 @@ import Weather from "./Weather/Weather"
 export default function Main(){
     return(
         <div>
-            {/* <Weather/>
-            <TeamRadio/> */}
+            {/* <Weather/> */}
+            <TeamRadio/>
             {/* <RaceControl/> */}
             {/* <CarData /> */}
-            <Intervals/>
+            {/* <Intervals/> */}
         </div>
         
     )

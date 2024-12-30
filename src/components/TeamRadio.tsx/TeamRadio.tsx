@@ -25,7 +25,7 @@ interface DriverData{
 export default function TeamRadio(){
 
     const [radio, setRadio] = useState<RadioData[] | null>(null)
-    const [driver, setDriver] = useState<DriverData[] | null>(null)
+    // const [driver, setDriver] = useState<DriverData[] | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
 
     useEffect(()=>{
@@ -40,17 +40,7 @@ export default function TeamRadio(){
                 setLoading(false)
             }
         }
-
-        // const fetchDriver = async() => {
-        //     try{
-        //         const data = await getData(urlDriver)
-        //         setDriver(data)
-        //     }catch(error){
-        //         console.error(error)
-        //     }
-        // }
         fetchRadio()
-        // fetchDriver()
     }, [])
 
     if(loading){
@@ -73,6 +63,8 @@ export default function TeamRadio(){
         <div>
             <h1>{dateConcat}</h1>
             {radio.map((radioItem) => {
+                const driverInfo = radio?.filter(item => item.driver_number === radioItem.driver_number)
+                
                 return(
                     <div>Driver number: {radioItem.driver_number} : <a href={radioItem.recording_url}>{radioItem.recording_url}</a></div>
                 )

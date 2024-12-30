@@ -12,8 +12,6 @@ interface IntervalsData{
 }
 
 interface PositionData extends IntervalsData{
-    // date: string
-    // driver_number: number
     position: number
 }
 export default function Intervals(){
@@ -61,11 +59,8 @@ export default function Intervals(){
     }   
 
     function displayDrivers(position: PositionData[]) {
-        const uniqueDrivers = getUniqueDriver(position)
-        console.log(uniqueDrivers);
-        
-        const sortedDrivers = Array.from(uniqueDrivers.values()).sort((a, b) => a.position - b.position) //need to figure out how to put dsq and dnf drivers to appear in the bottom of intervals. Solution 'Position'
-        // console.log(sortedDrivers);
+        const uniqueDrivers = getUniqueDriver(position)        
+        const sortedDrivers = Array.from(uniqueDrivers.values()).sort((a, b) => a.position - b.position)
         
         return (
             <div className="w-full flex flex-col items-center justify-center">
@@ -74,15 +69,17 @@ export default function Intervals(){
                     <p className="w-full flex justify-center border-2 border-black p-2">Driver number</p>
                     <p className="w-full flex justify-center border-2 border-black p-2">Gap to leader</p>
                 </div>
-                {sortedDrivers.map((driver, index) => (
-                    <div key={index} className="w-5/12 flex">
-                        <p className="w-2/12 full flex justify-center border-2 border-black p-2">{index+1}</p>
-                        <p className="w-full flex justify-center border-2 border-black p-2">{driver.driver_number}</p>
-                        <p className="w-full flex justify-center border-2 border-black p-2">+{driver.gap_to_leader}</p>
-                        {/* <p>Last update: {new Date(driver[1].date).toLocaleTimeString()}</p>
-                        <p>Last Interval: {driver[1].interval}</p> */}
-                    </div>
-                ))}
+                {sortedDrivers.map((driver, index) => {
+                    const driverInterval = interval?.filter(item => item.driver_number === driver.driver_number)
+                        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
+                    
+                    return(
+                        <div key={index} className="w-5/12 flex">
+                            <p className="w-2/12 full flex justify-center border-2 border-black p-2">{index+1}</p>
+                            <p className="w-full flex justify-center border-2 border-black p-2">{driver.driver_number}</p>
+                            <p className="w-full flex justify-center border-2 border-black p-2">{driverInterval ? `+${driverInterval.gap_to_leader}` : 'DNF'}</p>
+                    </div>)
+                })}
             </div>
         )
     }  
