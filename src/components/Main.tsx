@@ -1,17 +1,13 @@
-import CarData from "./CarData/CarData"
-import Intervals from "./Intervals/Intervals"
-import RaceControl from "./RaceControl/RaceControl"
-import TeamRadio from "./TeamRadio.tsx/TeamRadio"
-import Weather from "./Weather/Weather"
+import { Link } from "react-router";
 
 export default function Main(){
     return(
         <div>
-            {/* <Weather/> */}
-            <TeamRadio/>
-            {/* <RaceControl/> */}
-            {/* <CarData /> */}
-            {/* <Intervals/> */}
+            <Link className="p-2" to='/cardata'>CarData</Link>
+            <Link className="p-2" to='/intervals'>Intervals</Link>
+            <Link className="p-2" to='/racecontrol'>RaceControl</Link>
+            <Link className="p-2" to='/teamradio'>TeamRadio</Link>
+            <Link className="p-2" to='/weather'>Weather</Link>
         </div>
         
     )
