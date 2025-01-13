@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { getData } from "../../API/api"
 
-
 const url = 'https://api.openf1.org/v1/race_control?session_key=latest'
 
 interface RaceControlData{
@@ -25,6 +24,7 @@ export default function RaceControl(){
             try{
                 const data = await getData(url)
                 setEvent(data)
+                // console.dir(data , {depth: null})
             }catch(error){
                 console.error(error)
                 setLoading(false)

@@ -104,4 +104,3 @@ export default function Weather(){
         
     );
 }
-//key = 5, j = 0
